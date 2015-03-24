@@ -46,4 +46,13 @@ void cleanup<SDL_Surface>(SDL_Surface *surf){
 	SDL_FreeSurface(surf);
 }
 
-#endif
+// cleanup GL Context
+template<>
+void cleanup(SDL_GLContext *glContext) {
+	if (!glContext) {
+		return;
+	}
+	SDL_GL_DeleteContext(glContext);
+}
+
+#endif /* CLEANUP_H */
