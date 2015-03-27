@@ -14,6 +14,10 @@ protected:
 	SDL_TimerID timer;
 	bool done;
 
+	float x = 0;
+	float y = 0;
+	float z = 0;
+
 	GLUquadricObj *quadObject;
 
 	void HandleKeys(SDL_KeyboardEvent keyEvent);

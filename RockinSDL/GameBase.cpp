@@ -119,10 +119,7 @@ void GameBase::EventLoop(void)
 			break;
 
 		case SDL_KEYDOWN: // KEY DOWN!! I REPEAT: WE HAVE KEY DOWN!
-			
 			HandleKeys(event.key);
-			
-
 			break;
 
 		case SDL_QUIT:
@@ -141,7 +138,13 @@ void GameBase::HandleKeys(SDL_KeyboardEvent keyEvent) {
 	switch (keyEvent.keysym.sym) {
 	case SDLK_q:
 		done = true;
-		
+		break;
+	case SDLK_a:
+		x -= 0.1;
+		break;
+	case SDLK_d:
+		x += 0.1;
+		break;
 	}
 }
 
@@ -174,8 +177,9 @@ void GameBase::RenderFrame(void)
 
 	//glTranslatef(10, 10, 0);
 	glColor3f(0.7, 0.5, 0.8);
-	glRotatef(30, 0, 1, 0);
-	gluCylinder(quadObject, 1.0, 1.0, 10, 30, 30);
+	glRotatef(30, 0, 1, 1);
+	glTranslatef(x, y, z);
+	gluCylinder(quadObject, 1.0, 2.0, 10, 30, 30);
 
 	glPopMatrix();
 	SDL_GL_SwapWindow(mainWindow);
