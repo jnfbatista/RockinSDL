@@ -18,7 +18,32 @@ void GameBase::InitApp(void)
 {
 	// Create a 640 by 480 window.
 	InitializeSDL(640, 480);
-	CreateOrthographicProjection(4.0, 3.0);
+
+	//Initialize Projection Matrix
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(50.0, 1.0, 3.0, 7.0);
+
+	//Initialize Modelview Matrix
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	gluLookAt(
+		0.0, 0.0, 5.0,
+		0.0, 0.0, 0.0,
+		0.0, 1.0, 0.0);
+
+	//Initialize clear color
+	glClearColor(0.f, 0.f, 0.f, 1.f);
+
+	//CreateOrthographicProjection(4.0, 3.0);
+
+	
+	
+
+	// define the view 
+	//gluLookAt(10, 10, -10, 0, 0, 0, 0.0, 1.0, 0.0);
+	//glFrustum(-0.50, 0.50, -0.50, 0.50, 1.0, 3.0);
 
 	quadObject = gluNewQuadric();
 
@@ -35,15 +60,18 @@ void GameBase::InitializeSDL(Uint32 width, Uint32 height)
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 	// Create the window
-	mainWindow = SDL_CreateWindow("SDL2 OpenGL Example", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+	mainWindow = SDL_CreateWindow("Stuff!!!", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
 	mainGLContext = SDL_GL_CreateContext(mainWindow);
 
 }
 
+
+/*
+* this is great for 2D Games, not what we want
+*/
 void GameBase::CreateOrthographicProjection(GLfloat width, GLfloat height)
 {
-	// I use a near plane value of -1, and a far plane value of 1, which is what works best for 2D games.
-	glOrtho(0.0, width, 0.0, height, -1.0, 1.0);
+	glOrtho(0.0, width, 0.0, height, -1.0, 100.0);
 }
 
 void GameBase::InstallTimer(void)
@@ -129,8 +157,16 @@ void GameBase::GameLoop(void)
 void GameBase::RenderFrame(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
-	glColor3f(0.7, 0.5, 0.8);
 	//glRectf(1.0, 1.0, 3.0, 2.0);
+
+	glPushMatrix();
+
+
+	//glTranslatef(10, 10, 0);
+	glColor3f(0.7, 0.5, 0.8);
+	glRotatef(30, 0, 1, 0);
 	gluCylinder(quadObject, 1.0, 1.0, 10, 30, 30);
+
+	glPopMatrix();
 	SDL_GL_SwapWindow(mainWindow);
 }

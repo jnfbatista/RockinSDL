@@ -79,6 +79,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GameBase.cpp" />
     <ClCompile Include="launcher.cpp" />
   </ItemGroup>
@@ -86,6 +87,7 @@
     <Image Include="D:\OneDrive\steam_avatar.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Cleanup.h" />
     <ClInclude Include="GameBase.h" />
   </ItemGroup>
