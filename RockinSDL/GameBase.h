@@ -16,6 +16,8 @@ protected:
 
 	GLUquadricObj *quadObject;
 
+	void HandleKeys(SDL_KeyboardEvent keyEvent);
+
 public:
 	// Constructor and destructor
 	GameBase(void);

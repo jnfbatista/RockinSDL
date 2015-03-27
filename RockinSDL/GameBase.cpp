@@ -16,8 +16,8 @@ GameBase::~GameBase(void)
 // Initialization functions
 void GameBase::InitApp(void)
 {
-	// Create a 640 by 480 window.
-	InitializeSDL(640, 480);
+	// Initialize window
+	InitializeSDL(800, 600);
 
 	//Initialize Projection Matrix
 	glMatrixMode(GL_PROJECTION);
@@ -118,9 +118,11 @@ void GameBase::EventLoop(void)
 			HandleUserEvents(&event);
 			break;
 
-		case SDL_KEYDOWN:
-			// Quit when user presses a key.
-			done = true;
+		case SDL_KEYDOWN: // KEY DOWN!! I REPEAT: WE HAVE KEY DOWN!
+			
+			HandleKeys(event.key);
+			
+
 			break;
 
 		case SDL_QUIT:
@@ -133,6 +135,14 @@ void GameBase::EventLoop(void)
 
 	}   // End while
 
+}
+
+void GameBase::HandleKeys(SDL_KeyboardEvent keyEvent) {
+	switch (keyEvent.keysym.sym) {
+	case SDLK_q:
+		done = true;
+		
+	}
 }
 
 void GameBase::HandleUserEvents(SDL_Event* event)
