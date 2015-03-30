@@ -15,6 +15,7 @@ GameBase::~GameBase(void)
 
 // Initialization functions
 // check - https://www.opengl.org/archives/resources/faq/technical/viewing.htm
+// and - http://www.tomdalling.com/blog/modern-opengl/03-matrices-depth-buffering-animation/
 void GameBase::InitApp(void)
 {
 	// Initialize window
@@ -26,15 +27,15 @@ void GameBase::InitApp(void)
 	//Initialize Projection Matrix
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(50.0, 1.0, 2.0, 15.0);
+	gluPerspective(50.0, 1.0, 3.0, 105.0);
 
 	//Initialize Modelview Matrix
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
 	gluLookAt(
-		0.0, 0.0, 5.0,
-		0.0, 0.0, 0.0,
+		0.0, 0.0, 10.0,
+		0.0, 0.0, -1000.0,
 		0.0, 1.0, 0.0);
 
 	//Initialize clear color
@@ -70,7 +71,7 @@ void GameBase::CreateOrthographicProjection(GLfloat width, GLfloat height)
 
 void GameBase::InstallTimer(void)
 {
-	timer = SDL_AddTimer(30, GameLoopTimer, this);
+	timer = SDL_AddTimer(60, GameLoopTimer, this);
 }
 
 Uint32 GameBase::GameLoopTimer(Uint32 interval, void* param)
@@ -136,7 +137,7 @@ void GameBase::HandleKeys(SDL_KeyboardEvent keyEvent) {
 	}
 
 	// handle ship input
-	ship->HandleKeyInput(keyEvent);
+	ship->HandleKeyInput(keyEvent.keysym.sym);
 }
 
 void GameBase::HandleUserEvents(SDL_Event* event)

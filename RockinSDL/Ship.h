@@ -11,7 +11,7 @@ public:
 	~Ship();
 
 
-	void HandleKeyInput(SDL_KeyboardEvent keyEvent);
+	void HandleKeyInput(SDL_Keycode keyCode);
 
 	bool Render() override;
 };

@@ -3,10 +3,7 @@
 
 Ship::Ship()
 {
-
 	quadObject = gluNewQuadric();
-
-
 }
 
 
@@ -17,9 +14,9 @@ Ship::~Ship()
 	gluDeleteQuadric(quadObject);
 }
 
-void Ship::HandleKeyInput(SDL_KeyboardEvent keyEvent) {
+void Ship::HandleKeyInput(SDL_Keycode keyCode) {
 
-	switch (keyEvent.keysym.sym) {
+	switch (keyCode) {
 
 	case SDLK_a:
 		xPos -= movementStep;
@@ -27,14 +24,21 @@ void Ship::HandleKeyInput(SDL_KeyboardEvent keyEvent) {
 	case SDLK_d:
 		xPos += movementStep;
 		break;
+	}
+
+	switch (keyCode)
+	{
+
 	case SDLK_w:
 		yPos += movementStep;
 		break;
 	case SDLK_s:
 		yPos -= movementStep;
 		break;
+	default:
+		break;
 	}
-	
+
 }
 
 
@@ -43,9 +47,11 @@ bool Ship::Render()
 
 	glPushMatrix();
 	glColor3f(0.7, 0.5, 0.8);
-	glRotatef(30, 0, 1, 1);
+	glRotatef(45.0, 1, 0, 0);
+	//glRotatef(30, )
 	glTranslatef(xPos, yPos, zPos);
-	gluCylinder(quadObject, 1.0, 2.0, 10, 30, 30);
+	gluCylinder(quadObject, 0.0f, 1.0f, 5, 30, 30);
+
 
 	glPopMatrix();
 	return true;
