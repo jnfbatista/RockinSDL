@@ -21,5 +21,4 @@ int main(int argc, char* args[])
 	theGame.Cleanup();
 
 	return 0;
-	return 0;
 }

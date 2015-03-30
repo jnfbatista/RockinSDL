@@ -80,8 +80,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="GameBase.cpp" />
     <ClCompile Include="launcher.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="Ship.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="D:\OneDrive\steam_avatar.png" />
@@ -89,7 +92,10 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cleanup.h" />
+    <ClInclude Include="Drawable.h" />
     <ClInclude Include="GameBase.h" />
+    <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="Ship.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

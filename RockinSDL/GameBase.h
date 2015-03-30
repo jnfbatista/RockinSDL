@@ -1,6 +1,4 @@
 #pragma once
-#ifndef GAME_BASE_H
-#define GAME_BASE_H
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <GL\GLU.h>
@@ -50,5 +48,3 @@ typedef GameBase* GameAppPtr;
 typedef GameBase** GameAppHandle;
 
 const int RUN_GAME_LOOP = 1;
-
-#endif /* GAME_BASE_H */
