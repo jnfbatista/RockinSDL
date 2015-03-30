@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <GL\GLU.h>
+#include "Ship.h"
 
 
 class GameBase
@@ -12,11 +13,8 @@ protected:
 	SDL_TimerID timer;
 	bool done;
 
-	float x = 0;
-	float y = 0;
-	float z = 0;
+	Ship* ship;
 
-	GLUquadricObj *quadObject;
 
 	void HandleKeys(SDL_KeyboardEvent keyEvent);
 

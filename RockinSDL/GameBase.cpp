@@ -19,6 +19,9 @@ void GameBase::InitApp(void)
 	// Initialize window
 	InitializeSDL(800, 600);
 
+	// initalize game objects
+	ship = new Ship();
+
 	//Initialize Projection Matrix
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -34,18 +37,8 @@ void GameBase::InitApp(void)
 		0.0, 1.0, 0.0);
 
 	//Initialize clear color
-	glClearColor(0.f, 0.f, 0.f, 1.f);
-
-	//CreateOrthographicProjection(4.0, 3.0);
-
+	glClearColor(0.f, 0.f, 0.f, 1.f);	
 	
-	
-
-	// define the view 
-	//gluLookAt(10, 10, -10, 0, 0, 0, 0.0, 1.0, 0.0);
-	//glFrustum(-0.50, 0.50, -0.50, 0.50, 1.0, 3.0);
-
-	quadObject = gluNewQuadric();
 
 	InstallTimer();
 
@@ -139,13 +132,10 @@ void GameBase::HandleKeys(SDL_KeyboardEvent keyEvent) {
 	case SDLK_q:
 		done = true;
 		break;
-	case SDLK_a:
-		x -= 0.1;
-		break;
-	case SDLK_d:
-		x += 0.1;
-		break;
 	}
+
+	// handle ship input
+	ship->HandleKeyInput(keyEvent);
 }
 
 void GameBase::HandleUserEvents(SDL_Event* event)
@@ -171,16 +161,7 @@ void GameBase::RenderFrame(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	//glRectf(1.0, 1.0, 3.0, 2.0);
-
-	glPushMatrix();
-
-
-	//glTranslatef(10, 10, 0);
-	glColor3f(0.7, 0.5, 0.8);
-	glRotatef(30, 0, 1, 1);
-	glTranslatef(x, y, z);
-	gluCylinder(quadObject, 1.0, 2.0, 10, 30, 30);
-
-	glPopMatrix();
+	ship->Render();
+	
 	SDL_GL_SwapWindow(mainWindow);
 }

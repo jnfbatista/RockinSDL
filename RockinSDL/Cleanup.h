@@ -1,6 +1,4 @@
-#ifndef CLEANUP_H
-#define CLEANUP_H
-
+#pragma once
 #include <utility>
 #include <SDL.h>
 
@@ -54,5 +52,3 @@ void cleanup(SDL_GLContext *glContext) {
 	}
 	SDL_GL_DeleteContext(glContext);
 }
-
-#endif /* CLEANUP_H */

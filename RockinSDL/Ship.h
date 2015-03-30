@@ -1,12 +1,18 @@
 #pragma once
 #include "Drawable.h"
-class Ship :
-	 Drawable
+#include <SDL.h>
+
+class Ship : Drawable
 {
+	float movementStep = 0.2f;
+
 public:
 	Ship();
 	~Ship();
 
-	bool Render();
+
+	void HandleKeyInput(SDL_KeyboardEvent keyEvent);
+
+	bool Render() override;
 };
 
