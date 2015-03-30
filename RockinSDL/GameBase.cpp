@@ -14,6 +14,7 @@ GameBase::~GameBase(void)
 
 
 // Initialization functions
+// check - https://www.opengl.org/archives/resources/faq/technical/viewing.htm
 void GameBase::InitApp(void)
 {
 	// Initialize window
@@ -25,7 +26,7 @@ void GameBase::InitApp(void)
 	//Initialize Projection Matrix
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(50.0, 1.0, 3.0, 7.0);
+	gluPerspective(50.0, 1.0, 2.0, 15.0);
 
 	//Initialize Modelview Matrix
 	glMatrixMode(GL_MODELVIEW);
