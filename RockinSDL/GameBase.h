@@ -9,8 +9,16 @@
 #include "Obstacle.h"
 
 
+#define GROUND_START = -100;
+#define GROUND_STOP  = 100;
+
+
 class GameBase
 {
+
+	int groundStart = -100;
+	int groundEnd = 100;
+
 protected:
 	SDL_Window* mainWindow;
 	SDL_GLContext mainGLContext;
@@ -23,6 +31,9 @@ protected:
 
 
 	void HandleKeys(SDL_KeyboardEvent keyEvent);
+
+	// handle ground drawing
+	void RenderGround();
 
 public:
 	// Constructor and destructor

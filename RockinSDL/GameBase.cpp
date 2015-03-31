@@ -37,16 +37,16 @@ void GameBase::InitApp(void)
 	//Initialize Projection Matrix
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(50.0, 1.0, 3.0, 105.0);
+	gluPerspective(50.0, 800/600, 3.0, 105.0);
 
 	//Initialize Modelview Matrix
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
 	gluLookAt(
-		0.0, 0.0, 10.0,
-		0.0, 0.0, -1000.0,
-		0.0, 1.0, 0.0);
+		0.0, 10.0, 10.0, // eye
+		0.0, 0.0, 0.0, // looking at
+		0.0, 1.0, 0.0); // up vector (wtf m8)
 
 	//Initialize clear color
 	glClearColor(0.f, 0.f, 0.f, 1.f);
@@ -173,6 +173,10 @@ void GameBase::RenderFrame(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	//glRectf(1.0, 1.0, 3.0, 2.0);
+
+
+	RenderGround();
+
 	ship->Render();
 
 	// render obstacles
@@ -182,5 +186,40 @@ void GameBase::RenderFrame(void)
 		(*it)->Render();
 	}
 
+	
+
 	SDL_GL_SwapWindow(mainWindow);
+}
+
+
+void GameBase::RenderGround() {
+
+	//glcol
+	// TRIANGLES!!! 'Sup
+	glBegin(GL_TRIANGLE_STRIP);
+	
+	for (int z = groundStart; z < groundEnd; z++)
+	{
+		for (int x = groundStart; x < groundEnd; x++)
+		{
+
+			glColor3ub(100, 255, 100);
+			glVertex3f(x, 0, z);
+
+			glVertex3f(x + 1, 0, z);
+
+			glVertex3f(x, 0, z + 1);
+
+
+			glVertex3f(x +1, 0, z+1);
+
+			glVertex3f(x + 1, 0, z);
+
+			glVertex3f(x, 0, z + 1);
+
+
+		}
+	}
+
+	glEnd();
 }

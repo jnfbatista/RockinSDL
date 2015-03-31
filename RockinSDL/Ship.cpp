@@ -25,10 +25,10 @@ void Ship::HandleKeyInput(SDL_Keycode keyCode) {
 		xPos += movementStep;
 		break;
 	case SDLK_w:
-		yPos += movementStep;
+		zPos -= movementStep;
 		break;
 	case SDLK_s:
-		yPos -= movementStep;
+		zPos += movementStep;
 		break;
 	default:
 		break;
@@ -42,11 +42,11 @@ bool Ship::Render()
 
 	glPushMatrix();
 	glColor3f(0.7, 0.5, 0.8);
-	glRotatef(30.0f, 1, 0, 0);
+	//glRotatef(30.0f, 1, 0, 0);
 	glTranslatef(xPos, yPos, zPos);
+	
 	gluCylinder(quadObject, 0.0f, 0.5f, 1, 30, 30);
-
-
+	
 	glPopMatrix();
 	return true;
 }
