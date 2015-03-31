@@ -24,6 +24,9 @@ void GameBase::InitApp(void)
 	// initalize game objects
 	ship = new Ship();
 
+
+
+
 	//Initialize Projection Matrix
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
