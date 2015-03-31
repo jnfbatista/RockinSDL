@@ -42,8 +42,7 @@ bool Ship::Render()
 
 	glPushMatrix();
 	glColor3f(0.7, 0.5, 0.8);
-	glRotatef(30, 1, 0, 0);
-	//glRotatef(30, )
+	glRotatef(30.0f, 1, 0, 0);
 	glTranslatef(xPos, yPos, zPos);
 	gluCylinder(quadObject, 0.0f, 0.5f, 1, 30, 30);
 

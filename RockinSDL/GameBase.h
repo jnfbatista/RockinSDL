@@ -2,7 +2,11 @@
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <GL\GLU.h>
+
+#include <time.h>
+
 #include "Ship.h"
+#include "Obstacle.h"
 
 
 class GameBase
@@ -14,6 +18,8 @@ protected:
 	bool done;
 
 	Ship* ship;
+
+	std::vector<Obstacle*>* obstacles;
 
 
 	void HandleKeys(SDL_KeyboardEvent keyEvent);

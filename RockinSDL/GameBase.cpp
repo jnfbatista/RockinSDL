@@ -18,11 +18,18 @@ GameBase::~GameBase(void)
 // and - http://www.tomdalling.com/blog/modern-opengl/03-matrices-depth-buffering-animation/
 void GameBase::InitApp(void)
 {
+	//let's roll the dice
+	srand(static_cast<unsigned>(time(nullptr)));
+
 	// Initialize window
 	InitializeSDL(800, 600);
 
 	// initalize game objects
 	ship = new Ship();
+	obstacles = new std::vector<Obstacle*>();
+
+	for (int i = 0; i < 10; i++)
+		obstacles->push_back(new Obstacle());
 
 
 
@@ -42,8 +49,8 @@ void GameBase::InitApp(void)
 		0.0, 1.0, 0.0);
 
 	//Initialize clear color
-	glClearColor(0.f, 0.f, 0.f, 1.f);	
-	
+	glClearColor(0.f, 0.f, 0.f, 1.f);
+
 
 	InstallTimer();
 
@@ -167,6 +174,13 @@ void GameBase::RenderFrame(void)
 	glClear(GL_COLOR_BUFFER_BIT);
 	//glRectf(1.0, 1.0, 3.0, 2.0);
 	ship->Render();
-	
+
+	// render obstacles
+	std::vector<Obstacle*>::iterator it;
+	for (it = obstacles->begin(); it != obstacles->end(); ++it)
+	{
+		(*it)->Render();
+	}
+
 	SDL_GL_SwapWindow(mainWindow);
 }
