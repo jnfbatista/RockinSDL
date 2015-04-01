@@ -1,5 +1,7 @@
 #pragma once
 #include "Drawable.h"
+#include  "Utils.h"
+
 class Obstacle :  public Drawable
 {
 
@@ -11,7 +13,8 @@ public:
 	~Obstacle();
 
 
-	bool Render();
+	bool Render() override;
+	bool Render3D();
 
 };
 

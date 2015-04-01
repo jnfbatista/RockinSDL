@@ -9,12 +9,13 @@
 #include "Obstacle.h"
 
 
-#define GROUND_START = -100;
-#define GROUND_STOP  = 100;
-
-
 class GameBase
 {
+	Uint32 width;
+	Uint32 height;
+
+	// 3D mode (hopefully not wishful thinking)
+	bool bonusMode = false;
 
 	int groundStart = -100;
 	int groundEnd = 100;
@@ -43,7 +44,10 @@ public:
 	// Initialization functions
 	void InitApp(void);
 	void InitializeSDL(Uint32 width, Uint32 height);
-	void CreateOrthographicProjection(GLfloat width, GLfloat height);
+
+	// Projections
+	void DefineOrthographicProjection(GLfloat width, GLfloat height);
+	void Define3DProjection();
 	void InstallTimer(void);
 	static Uint32 GameLoopTimer(Uint32 interval, void* param);
 
@@ -59,7 +63,7 @@ public:
 	void RenderFrame(void);
 };
 
-typedef GameBase* GameAppPtr;
-typedef GameBase** GameAppHandle;
+//typedef GameBase* GameAppPtr;
+//typedef GameBase** GameAppHandle;
 
 const int RUN_GAME_LOOP = 1;

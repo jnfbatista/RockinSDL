@@ -32,7 +32,50 @@ void GameBase::InitApp(void)
 		obstacles->push_back(new Obstacle());
 
 
+	if (!bonusMode)
+	{
+		DefineOrthographicProjection(4, 3); // TODO: remove magic numbers it should be a ratio thing
+	}
+	else
+	{
+		Define3DProjection();
+	}
 
+
+
+	//Initialize clear color
+	glClearColor(0.f, 0.f, 0.f, 1.f);
+
+
+	InstallTimer();
+
+}
+
+void GameBase::InitializeSDL(Uint32 wWidth, Uint32 wHeight)
+{
+	width = wWidth;
+	height = wHeight;
+
+	int error = SDL_Init(SDL_INIT_EVERYTHING);
+	// Turn on double buffering.
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+
+	// Create the window
+	mainWindow = SDL_CreateWindow("Stuff!!!", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+	mainGLContext = SDL_GL_CreateContext(mainWindow);
+
+}
+
+
+// 2D game mode
+void GameBase::DefineOrthographicProjection(GLfloat width, GLfloat height)
+{
+	glOrtho(0.0, width, 0.0, height, -1.0, 100.0);
+}
+
+// 3D Game mode
+void GameBase::Define3DProjection()
+{
 
 	//Initialize Projection Matrix
 	glMatrixMode(GL_PROJECTION);
@@ -47,37 +90,8 @@ void GameBase::InitApp(void)
 		0.0, 10.0, 10.0, // eye
 		0.0, 0.0, 0.0, // looking at
 		0.0, 1.0, 0.0); // up vector (wtf m8)
-
-	//Initialize clear color
-	glClearColor(0.f, 0.f, 0.f, 1.f);
-
-
-	InstallTimer();
-
 }
 
-void GameBase::InitializeSDL(Uint32 width, Uint32 height)
-{
-	int error;
-
-	error = SDL_Init(SDL_INIT_EVERYTHING);
-	// Turn on double buffering.
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
-	// Create the window
-	mainWindow = SDL_CreateWindow("Stuff!!!", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
-	mainGLContext = SDL_GL_CreateContext(mainWindow);
-
-}
-
-
-/*
-* this is great for 2D Games, not what we want
-*/
-void GameBase::CreateOrthographicProjection(GLfloat width, GLfloat height)
-{
-	glOrtho(0.0, width, 0.0, height, -1.0, 100.0);
-}
 
 void GameBase::InstallTimer(void)
 {
@@ -172,12 +186,12 @@ void GameBase::GameLoop(void)
 void GameBase::RenderFrame(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
-	//glRectf(1.0, 1.0, 3.0, 2.0);
 
-
-	RenderGround();
+	glPushMatrix();
 
 	ship->Render();
+
+	glPopMatrix();
 
 	// render obstacles
 	std::vector<Obstacle*>::iterator it;
@@ -185,8 +199,7 @@ void GameBase::RenderFrame(void)
 	{
 		(*it)->Render();
 	}
-
-	
+		
 
 	SDL_GL_SwapWindow(mainWindow);
 }

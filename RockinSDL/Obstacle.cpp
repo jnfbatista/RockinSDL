@@ -25,6 +25,20 @@ bool Obstacle::Render()
 {
 	glPushMatrix();
 
+
+	glColor3f(0.5, 0.5, 0.5);
+	glTranslatef(xPos, 1, zPos);
+	Utils::DrawPolygon(0.5f, 5);
+
+	glPopMatrix();
+
+	return true;
+}
+
+bool Obstacle::Render3D()
+{
+	glPushMatrix();
+
 	//glClearColor()
 
 	glColor3f(0.5, 0.5, 0.5);

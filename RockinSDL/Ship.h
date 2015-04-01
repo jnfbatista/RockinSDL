@@ -1,6 +1,8 @@
 #pragma once
-#include "Drawable.h"
 #include <SDL.h>
+
+#include "Drawable.h"
+#include "Utils.h"
 
 class Ship : Drawable
 {
@@ -10,9 +12,9 @@ public:
 	Ship();
 	~Ship();
 
-
 	void HandleKeyInput(SDL_Keycode keyCode);
 
 	bool Render() override;
+	bool Render3D();
 };
 

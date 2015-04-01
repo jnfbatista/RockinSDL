@@ -12,15 +12,15 @@ protected:
 
 	GLUquadricObj *quadObject;
 
-	float xPos = 0.0f;
-	float yPos = 0.0f;
-	float zPos = 0.0f;
-
-	float xRot = 0.0f;
-	float yRot = 0.0f;
-	float zRot = 0.0f;
-
-	float angleRot = 0.0f;
+	GLfloat xPos = 0.0f;
+	GLfloat yPos = 0.0f;
+	GLfloat zPos = 0.0f;
+	
+	GLfloat xRot = 0.0f;
+	GLfloat yRot = 0.0f;
+	GLfloat zRot = 0.0f;
+	
+	GLfloat angleRot = 0.0f;
 
 	std::vector<Drawable> *children;
 

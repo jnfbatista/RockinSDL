@@ -41,7 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\libs\glew\include;C:\libs\SDL2\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\libs\glew\include;C:\libs\SDL2\include;C:\libs\glm;$(IncludePath)</IncludePath>
     <LibraryPath>C:\libs\glew\lib\Release\Win32;C:\libs\SDL2\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -85,6 +85,7 @@
     <ClCompile Include="launcher.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="D:\OneDrive\steam_avatar.png" />
@@ -96,6 +97,7 @@
     <ClInclude Include="GameBase.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Ship.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
