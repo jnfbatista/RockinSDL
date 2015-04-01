@@ -16,5 +16,6 @@ public:
 
 	bool Render() override;
 	bool Render3D();
+	void HandleMouseInput(SDL_MouseButtonEvent sdlMouseButtonEvent);
 };
 

@@ -34,7 +34,7 @@ void GameBase::InitApp(void)
 
 	if (!bonusMode)
 	{
-		DefineOrthographicProjection(4, 3); // TODO: remove magic numbers it should be a ratio thing
+		DefineOrthographicProjection(12, 9); // TODO: remove magic numbers it should be a ratio thing
 	}
 	else
 	{
@@ -141,6 +141,10 @@ void GameBase::EventLoop(void)
 			HandleKeys(event.key);
 			break;
 
+		case SDL_MOUSEBUTTONDOWN:
+			HandleMouse(event.button);
+			break;
+
 		case SDL_QUIT:
 			done = true;
 			break;
@@ -162,6 +166,12 @@ void GameBase::HandleKeys(SDL_KeyboardEvent keyEvent) {
 
 	// handle ship input
 	ship->HandleKeyInput(keyEvent.keysym.sym);
+}
+
+
+void GameBase::HandleMouse(SDL_MouseButtonEvent sdlMouseButtonEvent)
+{
+	ship->HandleMouseInput(sdlMouseButtonEvent);
 }
 
 void GameBase::HandleUserEvents(SDL_Event* event)

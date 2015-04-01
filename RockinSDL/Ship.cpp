@@ -42,7 +42,10 @@ bool Ship::Render()
 
 
 	glTranslatef(xPos, yPos, zPos);
+	glRotatef(angleRot, 0, 0, 1);
 
+
+	glColor3f(0.7, 0.5, 0.8);
 	Utils::DrawPolygon(0.5f, 3);
 
 	glPopMatrix();
@@ -62,4 +65,24 @@ bool Ship::Render3D()
 
 	glPopMatrix();
 	return true;
+}
+
+void Ship::HandleMouseInput(SDL_MouseButtonEvent sdlMouseButtonEvent)
+{
+	switch (sdlMouseButtonEvent.button)
+	{
+	case SDL_BUTTON_MIDDLE:
+		//sdlMouseButtonEvent.
+		break;
+
+	case SDL_BUTTON_LEFT:
+
+		break;
+
+	case SDL_BUTTON_RIGHT:
+
+		break;
+
+
+	}
 }

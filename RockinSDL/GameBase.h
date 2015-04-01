@@ -54,6 +54,7 @@ public:
 	// Cleanup functions
 	void Cleanup(void);
 
+	void HandleMouse(SDL_MouseButtonEvent sdlMouseButtonEvent);
 	// Event-related functions
 	void EventLoop(void);
 	void HandleUserEvents(SDL_Event* event);
