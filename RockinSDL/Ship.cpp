@@ -4,46 +4,82 @@
 Ship::Ship()
 {
 	quadObject = gluNewQuadric();
+
+	xPos = 6.0f;
+	yPos = 4.5f;
 }
 
 
 Ship::~Ship()
 {
-
 	// delete quadric
 	gluDeleteQuadric(quadObject);
 }
 
-void Ship::HandleKeyInput(SDL_Keycode keyCode) {
+void Ship::HandleKeyInput(const Uint8 * keysState) {
 
-	switch (keyCode) {
+	glm::vec2 accelerateDirection;
 
-	case SDLK_a:
-		xPos -= movementStep;
-		break;
-	case SDLK_d:
-		xPos += movementStep;
-		break;
-	case SDLK_w:
-		yPos += movementStep;
-		break;
-	case SDLK_s:
-		yPos -= movementStep;
-		break;
-	default:
-		break;
+	if (keysState[SDL_SCANCODE_W])
+	{
+		//yPos += movementStep;
+		accelerateDirection.y = 1;
 	}
+	if (keysState[SDL_SCANCODE_A])
+	{
+		//xPos -= movementStep;
+		accelerateDirection.x = -1;
+	}
+	if (keysState[SDL_SCANCODE_S])
+	{
+		//yPos -= movementStep;
+		accelerateDirection.y = -1;
+	}
+	if (keysState[SDL_SCANCODE_D])
+	{
+		//xPos += movementStep;
+		accelerateDirection.x = 1;
+	}
+
+	if (keysState[SDL_SCANCODE_SPACE])
+	{
+		// shots fired!!
+	}
+
+	// rotation
+	if (keysState[SDL_SCANCODE_R])
+	{
+		// rotate 45ª (maybe, sort of, kind of)
+		targetAngle = angleRot + 45;
+	}
+	if (keysState[SDL_SCANCODE_LEFT])
+	{
+		targetAngle = angleRot - rotationStep;
+	}
+	if (keysState[SDL_SCANCODE_RIGHT])
+	{
+		targetAngle = angleRot + rotationStep;
+	}
+
+
+	// movement
+	if (accelerateDirection.x != 0 && accelerateDirection.y != 0 )
+		Accelerate(accelerateDirection);	
 
 }
 
 bool Ship::Render()
 {
-	glPushMatrix();
+	//UpdateSpeed();
+	UpdateRotation();
 
+	xPos += velocity.x;
+	yPos += velocity.y;
+
+	glPushMatrix();
 
 	glTranslatef(xPos, yPos, zPos);
 	glRotatef(angleRot, 0, 0, 1);
-
 
 	glColor3f(0.7, 0.5, 0.8);
 	Utils::DrawPolygon(0.5f, 3);

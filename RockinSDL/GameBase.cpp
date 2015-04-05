@@ -29,12 +29,13 @@ void GameBase::InitApp(void)
 	obstacles = new std::vector<Obstacle*>();
 
 	for (int i = 0; i < 10; i++)
+	{
 		obstacles->push_back(new Obstacle());
-
+	}
 
 	if (!bonusMode)
 	{
-		DefineOrthographicProjection(12, 9); // TODO: remove magic numbers it should be a ratio thing
+		DefineOrthographicProjection(12, 9); // TODO: remove magic numbers it should be a ratio thingy
 	}
 	else
 	{
@@ -42,13 +43,11 @@ void GameBase::InitApp(void)
 	}
 
 
-
 	//Initialize clear color
 	glClearColor(0.f, 0.f, 0.f, 1.f);
 
 
 	InstallTimer();
-
 }
 
 void GameBase::InitializeSDL(Uint32 wWidth, Uint32 wHeight)
@@ -61,7 +60,7 @@ void GameBase::InitializeSDL(Uint32 wWidth, Uint32 wHeight)
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
 	// Create the window
-	mainWindow = SDL_CreateWindow("Stuff!!!", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+	mainWindow = SDL_CreateWindow("Ubisoft Assignment!", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
 	mainGLContext = SDL_GL_CreateContext(mainWindow);
 
 }
@@ -131,27 +130,34 @@ void GameBase::EventLoop(void)
 {
 	SDL_Event event;
 
-	while ((!done) && (SDL_WaitEvent(&event))) {
-		switch (event.type) {
-		case SDL_USEREVENT:
-			HandleUserEvents(&event);
-			break;
+	while (!done) {
 
-		case SDL_KEYDOWN: // KEY DOWN!! I REPEAT: WE HAVE KEY DOWN!
-			HandleKeys(event.key);
-			break;
+		while (SDL_PollEvent(&event))
+		{
+			switch (event.type) {
+			case SDL_USEREVENT:
+				HandleUserEvents(&event);
+				break;
 
-		case SDL_MOUSEBUTTONDOWN:
-			HandleMouse(event.button);
-			break;
+			case SDL_KEYDOWN: // KEY DOWN!! I REPEAT: WE HAVE KEY DOWN!
+				HandleKeys(event.key);
+				break;
+			case SDL_MOUSEBUTTONDOWN:
+				HandleMouse(event.button);
+				break;
 
-		case SDL_QUIT:
-			done = true;
-			break;
+			case SDL_QUIT:
+				done = true;
+				break;
 
-		default:
-			break;
-		}   // End switch
+			default:
+				break;
+			}   // End switch
+
+
+			//HandleUserEvents(&event);
+		}
+		
 
 	}   // End while
 
@@ -164,8 +170,13 @@ void GameBase::HandleKeys(SDL_KeyboardEvent keyEvent) {
 		break;
 	}
 
+	// get keyboard state
+	const Uint8 *state = SDL_GetKeyboardState(nullptr);
+
+
+
 	// handle ship input
-	ship->HandleKeyInput(keyEvent.keysym.sym);
+	ship->HandleKeyInput(state);
 }
 
 
@@ -209,7 +220,6 @@ void GameBase::RenderFrame(void)
 	{
 		(*it)->Render();
 	}
-		
 
 	SDL_GL_SwapWindow(mainWindow);
 }

@@ -48,6 +48,8 @@ public:
 	// Projections
 	void DefineOrthographicProjection(GLfloat width, GLfloat height);
 	void Define3DProjection();
+
+
 	void InstallTimer(void);
 	static Uint32 GameLoopTimer(Uint32 interval, void* param);
 
@@ -63,8 +65,5 @@ public:
 	void GameLoop(void);
 	void RenderFrame(void);
 };
-
-//typedef GameBase* GameAppPtr;
-//typedef GameBase** GameAppHandle;
 
 const int RUN_GAME_LOOP = 1;
