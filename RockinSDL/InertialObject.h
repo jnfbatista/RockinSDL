@@ -7,7 +7,7 @@ protected:
 	float maxLinearSpeed = 0.8f;
 
 	// drag coefficient is considered
-	float drag = -0.1f;
+	float drag = 0.005f;
 
 	// Current speed
 	glm::vec2 velocity = glm::vec2(0.f, 0.f);
