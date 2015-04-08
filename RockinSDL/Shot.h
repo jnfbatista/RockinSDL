@@ -3,13 +3,16 @@
 class Shot :
 	public Drawable
 {
+
+	GLfloat radius = 0.2f;
+
 public:
-	Shot();
+	Shot(GLfloat x, GLfloat y, GLfloat distance, GLfloat angle);
 	~Shot();
 
 	// Fire the shot
 	void Fire();
 
-	bool Render();
+	bool Render() override;
 };
 

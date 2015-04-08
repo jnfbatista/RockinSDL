@@ -4,9 +4,13 @@
 Ship::Ship()
 {
 	quadObject = gluNewQuadric();
+	shots = new std::vector<Shot*>();
 
+	// start at center position
 	xPos = 6.0f;
 	yPos = 4.5f;
+
+	
 }
 
 
@@ -44,6 +48,7 @@ void Ship::HandleKeyInput(const Uint8 * keysState) {
 	if (keysState[SDL_SCANCODE_SPACE])
 	{
 		// shots fired!!
+		Shoot();
 	}
 
 	// rotation
@@ -71,6 +76,8 @@ void Ship::HandleKeyInput(const Uint8 * keysState) {
 
 }
 
+
+
 bool Ship::Render()
 {
 	UpdateSpeed();
@@ -87,7 +94,17 @@ bool Ship::Render()
 	glColor3f(0.7, 0.5, 0.8);
 	Utils::DrawPolygon(0.5f, 3);
 
+
+	std::vector<Shot*>::iterator it;
+	
 	glPopMatrix();
+
+	// render shots
+	for (it = shots->begin(); it != shots->end(); ++it)
+	{
+		(*it)->Render();
+	}
+
 
 	return true;
 }
@@ -124,4 +141,10 @@ void Ship::HandleMouseInput(SDL_MouseButtonEvent sdlMouseButtonEvent)
 
 
 	}
+}
+
+void Ship::Shoot()
+{
+	shots->push_back(new Shot(xPos, yPos, 0.5f, angleRot));
+
 }
