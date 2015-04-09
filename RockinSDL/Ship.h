@@ -10,9 +10,8 @@ class Ship : Drawable, InertialObject
 {
 	float movementStep = 0.2f;
 
-	// for rotation animation purposes
 
-	std::vector<Shot *> *shots;
+	std::vector<Shot> *shots;
 
 public:
 	Ship();
@@ -24,6 +23,8 @@ public:
 	bool Render3D();
 	void HandleMouseInput(SDL_MouseButtonEvent sdlMouseButtonEvent);
 
-	void Shoot();
+	std::vector<Shot>* GetShots();
+
+	void Shoot(int vertex);
 };
 

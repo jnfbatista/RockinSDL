@@ -2,14 +2,12 @@
 
 Obstacle::Obstacle()
 {
-	obsSize = static_cast<float> (rand() % 5) / 5.f;
+	objSize = static_cast<float> (rand() % 5) / 5.f;
 
 	//  randomize position
-	yPos = 0.5f;
-
-	int randVal = rand() % 20;
-	xPos = static_cast<float> (randVal)-10.f;
-	zPos = -(rand() % 20) - 10.f;
+	yPos = static_cast<float> (rand() % 9);
+	xPos = static_cast<float> (rand() % 12);
+	zPos = 0.f;
 
 	// define speed and direction
 	// this should be updated in an AI kind of idea
@@ -26,8 +24,6 @@ Obstacle::~Obstacle()
 }
 
 
-
-
 void Obstacle::Move()
 {
 	// straight line
@@ -39,14 +35,26 @@ void Obstacle::Move()
 
 bool Obstacle::Render()
 {
-	Move();
+
+
+	if (destroy && objSize < 0.0f)
+		return false;
+
+	if (!destroy)
+	{
+		Move();
+	}
+	else
+	{
+		objSize -= 0.05f;
+	}	
 
 	glPushMatrix();
 
 
 	glColor3f(0.5, 0.5, 0.5);
 	glTranslatef(xPos, yPos, 1);
-	Utils::DrawPolygon(obsSize, 5);
+	Utils::DrawPolygon(objSize, 5);
 	
 	glPopMatrix();
 
@@ -66,7 +74,7 @@ bool Obstacle::Render3D()
 	glPopMatrix();
 
 	// update position based on speed
-	zPos += 0.05;
+	zPos += 0.05f;
 
 	return true;
 }

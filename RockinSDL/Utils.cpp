@@ -1,23 +1,6 @@
 #include "Utils.h"
 
 
-void Utils::DrawEquilateralRectangle(GLfloat side)
-{
-
-	float angle = DegreesToRadians(60);
-	GLfloat top[] = { side * cos(angle), side * sin(angle) };
-
-	glBegin(GL_TRIANGLE_STRIP);
-
-
-	glColor3ub(200, 0, 0);
-	glVertex3f(0.f, 0.f, 0.f);
-	glVertex3f(top[1], top[0], 0.f);
-	glVertex3f(side, 0.f, 0.f);
-
-	glEnd();
-}
-
 float Utils::DegreesToRadians(float angle)
 {
 	return (angle * PI / 180.f);
@@ -54,11 +37,3 @@ void Utils::DrawPolygon(float radius, int slices)
 
 }
 
-Utils::Utils()
-{
-}
-
-
-Utils::~Utils()
-{
-}

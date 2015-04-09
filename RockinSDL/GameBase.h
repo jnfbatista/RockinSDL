@@ -7,6 +7,7 @@
 
 #include "Ship.h"
 #include "Obstacle.h"
+#include "ColisionManager.h"
 
 
 class GameBase
@@ -20,17 +21,21 @@ class GameBase
 	int groundStart = -100;
 	int groundEnd = 100;
 
+	
+
 protected:
 	SDL_Window* mainWindow;
 	SDL_GLContext mainGLContext;
 	SDL_TimerID timer;
 	bool done;
 
+	// game objects
 	Ship* ship;
+	std::vector<Obstacle>* obstacles;
+	std::vector<Shot> *shots;
 
-	std::vector<Obstacle*>* obstacles;
-
-
+	ColisionManager* collisionManager;
+	
 	void HandleKeys(SDL_KeyboardEvent keyEvent);
 
 	// handle ground drawing

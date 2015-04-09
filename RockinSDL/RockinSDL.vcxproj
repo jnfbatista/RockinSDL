@@ -80,6 +80,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="ColisionManager.cpp" />
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="GameBase.cpp" />
     <ClCompile Include="InertialObject.cpp" />
@@ -95,6 +96,7 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cleanup.h" />
+    <ClInclude Include="ColisionManager.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="GameBase.h" />
     <ClInclude Include="InertialObject.h" />

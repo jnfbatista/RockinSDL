@@ -12,14 +12,8 @@
 class Utils
 {
 public:
-
-	static void DrawEquilateralRectangle(GLfloat side);
-
 	static float DegreesToRadians(float angle);
 
 	static void DrawPolygon(float radius, int slices);
-
-	Utils();
-	~Utils();
 };
 

@@ -7,7 +7,6 @@ class Obstacle :  public Drawable
 {
 	GLUquadricObj * quadObject;
 	
-	float obsSize;
 
 	float speed;
 	glm::vec2 movementDirection;

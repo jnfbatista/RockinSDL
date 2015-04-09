@@ -42,6 +42,9 @@
     <ClCompile Include="Shot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ColisionManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="D:\OneDrive\steam_avatar.png">
@@ -74,6 +77,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Shot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ColisionManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

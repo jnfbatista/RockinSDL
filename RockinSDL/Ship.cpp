@@ -4,13 +4,17 @@
 Ship::Ship()
 {
 	quadObject = gluNewQuadric();
-	shots = new std::vector<Shot*>();
+	shots = new std::vector<Shot>();
+
+	drag = 0.001f;
 
 	// start at center position
 	xPos = 6.0f;
 	yPos = 4.5f;
 
-	
+	// define radius
+	objSize = 0.5f;
+
 }
 
 
@@ -47,8 +51,7 @@ void Ship::HandleKeyInput(const Uint8 * keysState) {
 
 	if (keysState[SDL_SCANCODE_SPACE])
 	{
-		// shots fired!!
-		Shoot();
+		Shoot(0); // shots fired!!
 	}
 
 	// rotation
@@ -59,11 +62,11 @@ void Ship::HandleKeyInput(const Uint8 * keysState) {
 	}
 	if (keysState[SDL_SCANCODE_LEFT])
 	{
-		targetAngle = angleRot - rotationStep;
+		targetAngle = angleRot - 5;
 	}
 	if (keysState[SDL_SCANCODE_RIGHT])
 	{
-		targetAngle = angleRot + rotationStep;
+		targetAngle = angleRot + 5;
 	}
 
 
@@ -72,8 +75,6 @@ void Ship::HandleKeyInput(const Uint8 * keysState) {
 	{
 		Accelerate(accelerateDirection);
 	}
-
-
 }
 
 
@@ -92,19 +93,16 @@ bool Ship::Render()
 	glRotatef(angleRot, 0, 0, 1);
 
 	glColor3f(0.7, 0.5, 0.8);
-	Utils::DrawPolygon(0.5f, 3);
+	Utils::DrawPolygon(objSize, 3);
 
 
-	std::vector<Shot*>::iterator it;
 	
+
 	glPopMatrix();
 
-	// render shots
-	for (it = shots->begin(); it != shots->end(); ++it)
-	{
-		(*it)->Render();
-	}
 
+
+	// render shots
 
 	return true;
 }
@@ -127,24 +125,29 @@ void Ship::HandleMouseInput(SDL_MouseButtonEvent sdlMouseButtonEvent)
 {
 	switch (sdlMouseButtonEvent.button)
 	{
-	case SDL_BUTTON_MIDDLE:
-		//sdlMouseButtonEvent.
-		break;
-
 	case SDL_BUTTON_LEFT:
 
+		Shoot(0);
+		break;
+	case SDL_BUTTON_MIDDLE:
+		Shoot(1);
 		break;
 
 	case SDL_BUTTON_RIGHT:
-
+		Shoot(2);
 		break;
-
 
 	}
 }
 
-void Ship::Shoot()
+std::vector<Shot>* Ship::GetShots()
 {
-	shots->push_back(new Shot(xPos, yPos, 0.5f, angleRot));
+	return shots;
+}
+
+void Ship::Shoot(int vertex)
+{
+
+	shots->push_back(Shot(xPos, yPos, objSize, angleRot + 120 * vertex));
 
 }

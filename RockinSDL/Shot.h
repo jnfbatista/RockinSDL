@@ -4,15 +4,17 @@ class Shot :
 	public Drawable
 {
 
-	GLfloat radius = 0.2f;
+	GLfloat linearSpeed = 0.5f;
+	glm::vec2 direction;
 
 public:
+	// Fire the shot
 	Shot(GLfloat x, GLfloat y, GLfloat distance, GLfloat angle);
 	~Shot();
 
-	// Fire the shot
-	void Fire();
-
+	
 	bool Render() override;
+
+	void UpdatePosition();
 };
 

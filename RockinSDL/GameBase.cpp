@@ -15,7 +15,6 @@ GameBase::~GameBase(void)
 
 // Initialization functions
 // check - https://www.opengl.org/archives/resources/faq/technical/viewing.htm
-// and - http://www.tomdalling.com/blog/modern-opengl/03-matrices-depth-buffering-animation/
 void GameBase::InitApp(void)
 {
 	//let's roll the dice
@@ -26,16 +25,21 @@ void GameBase::InitApp(void)
 
 	// initalize game objects
 	ship = new Ship();
-	obstacles = new std::vector<Obstacle*>();
+	shots = ship->GetShots();
+	obstacles = new std::vector<Obstacle>();
+
+	collisionManager = new ColisionManager(ship, obstacles, shots);
+	collisionManager->SetBoundaries(12, 9);
+
 
 	for (int i = 0; i < 10; i++)
 	{
-		obstacles->push_back(new Obstacle());
+		obstacles->push_back(Obstacle());
 	}
 
 	if (!bonusMode)
 	{
-		DefineOrthographicProjection(12, 9); // TODO: remove magic numbers it should be a ratio thingy
+		DefineOrthographicProjection(12, 9); // TODO: remove magic numbers it should be a ratio
 	}
 	else
 	{
@@ -154,8 +158,6 @@ void GameBase::EventLoop(void)
 				break;
 			}   // End switch
 
-
-			//HandleUserEvents(&event);
 		}
 		
 
@@ -201,6 +203,7 @@ void GameBase::HandleUserEvents(SDL_Event* event)
 // Game related functions
 void GameBase::GameLoop(void)
 {
+	collisionManager->CalculateColisions();
 	RenderFrame();
 }
 
@@ -214,11 +217,23 @@ void GameBase::RenderFrame(void)
 
 	glPopMatrix();
 
+	// render shots
+
+	std::vector<Shot>::iterator shotIt;
+	for (shotIt = shots->begin(); shotIt != shots->end(); ++shotIt)
+	{
+		(*shotIt).Render();
+	}
+
+
 	// render obstacles
-	std::vector<Obstacle*>::iterator it;
+	std::vector<Obstacle>::iterator it;
 	for (it = obstacles->begin(); it != obstacles->end(); ++it)
 	{
-		(*it)->Render();
+		if(!(*it).Render())
+		{
+			(*it) = Obstacle();
+		}
 	}
 
 	SDL_GL_SwapWindow(mainWindow);
@@ -228,7 +243,7 @@ void GameBase::RenderFrame(void)
 void GameBase::RenderGround() {
 
 	//glcol
-	// TRIANGLES!!! 'Sup
+	// TRIANGLES!!! 
 	glBegin(GL_TRIANGLE_STRIP);
 	
 	for (int z = groundStart; z < groundEnd; z++)

@@ -4,8 +4,15 @@
 
 Shot::Shot(GLfloat x, GLfloat y, GLfloat distance, GLfloat angle)
 {
-	xPos = x + radius * cos(Utils::DegreesToRadians(angle)) + radius;
-	yPos = y + radius * sin(Utils::DegreesToRadians(angle)) + radius;
+	objSize = 0.2f;
+
+	float cx = cos(Utils::DegreesToRadians(angle));
+	float cy = sin(Utils::DegreesToRadians(angle));
+
+	xPos = x + distance * cx;
+	yPos = y + distance * cy;
+
+	direction = glm::normalize(glm::vec2(cx, cy));
 }
 
 
@@ -13,18 +20,33 @@ Shot::~Shot()
 {
 }
 
-void Shot::Fire()
-{
-}
-
 bool Shot::Render()
 {
+
+	if (destroy && objSize < 0.0f)
+		return false;
+	
+	if (!destroy)
+	{
+		UpdatePosition();
+	}
+	else
+	{
+		objSize -= 0.05f;
+	}
+
 	glPushMatrix();
 
 	glTranslatef(xPos, yPos, zPos);
-	Utils::DrawPolygon(radius, 40);
+	Utils::DrawPolygon(objSize, 40);
 
 	glPopMatrix();
 
 	return true;
+}
+
+void Shot::UpdatePosition()
+{
+	xPos += linearSpeed * direction.x;
+	yPos += linearSpeed * direction.y;
 }
