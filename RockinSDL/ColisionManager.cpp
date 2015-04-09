@@ -26,8 +26,8 @@ void ColisionManager::CalculateColisions()
 			continue;
 
 		// out of boundaries
-		if (shotPos.x - shot->GetRadius() < 0.f || shotPos.x + shot->GetRadius() >= xViewport || 
-			shotPos.y - shot->GetRadius() < 0.f || shotPos.y + shot->GetRadius() >= yViewport)
+		if (shotPos.x + shot->GetRadius() < 0.f || shotPos.x - shot->GetRadius() >= xViewport || 
+			shotPos.y + shot->GetRadius() < 0.f || shotPos.y - shot->GetRadius() >= yViewport)
 		{
 			shot->Destroy();
 			continue;
@@ -43,8 +43,8 @@ void ColisionManager::CalculateColisions()
 				continue;
 
 			// out of boundaries
-			if (obsPosition.x - obs->GetRadius() < 0.f || obsPosition.x + obs->GetRadius() >= xViewport ||
-				obsPosition.y - obs->GetRadius() < 0.f || obsPosition.y + obs->GetRadius() >= yViewport)
+			if (obsPosition.x + obs->GetRadius() < 0.f || obsPosition.x - obs->GetRadius() >= xViewport ||
+				obsPosition.y + obs->GetRadius() < 0.f || obsPosition.y - obs->GetRadius() >= yViewport)
 			{
 				obs->Destroy();
 				continue;

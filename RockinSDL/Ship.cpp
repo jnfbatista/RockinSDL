@@ -90,7 +90,7 @@ void Ship::HandleKeyInput(const Uint8 * keysState) {
 bool Ship::Render()
 {
 
-	// if out of bounds cheat easily
+	// if out of bounds easy cheat 
 	if (xPos + objSize < 0.f)
 		xPos = 12.f + objSize;
 	else if (xPos - objSize > 12.f)
