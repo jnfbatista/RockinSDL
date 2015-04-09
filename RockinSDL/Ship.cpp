@@ -49,13 +49,22 @@ void Ship::HandleKeyInput(const Uint8 * keysState) {
 		accelerateDirection.x = 1;
 	}
 
-	if (keysState[SDL_SCANCODE_SPACE])
+	if (keysState[SDL_SCANCODE_J])
 	{
 		Shoot(0); // shots fired!!
 	}
+	if (keysState[SDL_SCANCODE_K])
+	{
+		Shoot(1); // shots fired!!
+	}
+	if (keysState[SDL_SCANCODE_L])
+	{
+		Shoot(2); // shots fired!!
+	}
+
 
 	// rotation
-	if (keysState[SDL_SCANCODE_R])
+	if (keysState[SDL_SCANCODE_SPACE])
 	{
 		// rotate 45ª
 		targetAngle = angleRot + 45;
@@ -69,7 +78,6 @@ void Ship::HandleKeyInput(const Uint8 * keysState) {
 		targetAngle = angleRot + 5;
 	}
 
-
 	// movement
 	if (accelerateDirection.x != 0 || accelerateDirection.y != 0)
 	{
@@ -81,6 +89,18 @@ void Ship::HandleKeyInput(const Uint8 * keysState) {
 
 bool Ship::Render()
 {
+
+	// if out of bounds cheat easily
+	if (xPos + objSize < 0.f)
+		xPos = 12.f + objSize;
+	else if (xPos - objSize > 12.f)
+		xPos = 0.f + objSize;
+
+	if (yPos + objSize < 0.f)
+		yPos = 9.f + objSize;
+	else if (yPos - objSize > 9.f)
+		yPos = 0.f + objSize;
+
 	UpdateSpeed();
 	UpdateRotation();
 
